@@ -1,0 +1,12 @@
+.card {
+  .card-body {
+    a {
+      transition: 0.5s !important;
+      cursor: pointer;
+      justify-content: end;
+    }
+    &:hover a {
+      display: flex !important;
+    }
+  }
+}

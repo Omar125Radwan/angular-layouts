@@ -1,0 +1,54 @@
+<ng-container *ngIf="items">
+  <div class="input-group my-5">
+    <span (click)="open(content, '')" class="input-group-text bg-success text-white" style="cursor: pointer;">
+      <i class="fas fa-plus"></i>
+    </span>
+    <input [(ngModel)]="term" type="text" class="form-control">
+    <span class="input-group-text bg-warning" style="cursor: pointer;">Search</span>
+  </div>
+</ng-container>
+<ng-container *ngIf="items">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
+    <div class="col mb-3" *ngFor="let item of items |filter:term">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-between">
+            {{item.title}}
+            <a (click)="open(content, item.id)" class="d-none"><i class="fa text-success fa-edit"></i></a>
+          </h5>
+          <p class="card-text">{{item.description}}</p>
+          <a (click)="deleteItem(deleteModel, item.id)" class="d-none">
+            <i class="fas fa-trash text-danger fa-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!items">
+  <div class="d-flex justify-content-center">
+    <div class="alert alert-danger" role="alert">There is no notes</div>
+  </div>
+</ng-container>
+
+<ng-template #deleteModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title text-danger" id="modal-basic-title">Alert!!!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="c('Save click')">Delete</button>
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Item details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <app-note-show [itemId]="itemId" (items)="qetUpdateItems($event)"></app-note-show>
+</ng-template>

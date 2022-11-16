@@ -1,0 +1,24 @@
+<h3 class="alert alert-info text-center my-4" role="alert">Add New Post</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="addForm" (submit)="onSubmit()">
+        <div class="form-group mb-3">
+          <label for="postTitle">Title</label>
+          <input formControlName="title" id="postTitle" name="postTitle" type="text" class="form-control" placeholder="Enter Title"
+            [ngClass]="{'is-invalid': submitted && f.title.errors?.['required']}"
+          >
+          <div class="alert my-2 alert-danger" role="alert" *ngIf="submitted && f.title.errors?.['required']">Title is required</div>
+        </div>
+        <div class="form-group mb-3">
+          <label for="postDescription">Description</label>
+          <textarea formControlName="description" rows="6" id="postDescription" name="postDescription" type="text" class="form-control" placeholder="Enter Description"
+          [ngClass]="{'is-invalid': submitted && f.description.errors?.['required']}"
+          ></textarea>
+          <div class="alert my-2 alert-danger" role="alert" *ngIf="submitted && f.description.errors?.['required']">Title is required</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="text-center form-container">
+  <main class="form-signin">
+    <form [formGroup]="signupForm" (submit)="onSubmit()">
+      <img class="mb-4" src="/assets/1.png" alt="" width="60" height="60">
+      <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+  
+      <div class="form-floating mb-3">
+        <input formControlName="name" type="text" class="form-control" id="floatingInput" placeholder="Full Name" [ngClass]="{'is-invalid': submitted && f.name.errors?.['required']}">
+        <label for="floatingInput">Full Name</label>
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors?.['required']">Full Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" [ngClass]="{'is-invalid': submitted && f.email.errors?.['required']}">
+        <label for="floatingInput">Email address</label>
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors?.['required']">Email is required</div>
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+        <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" [ngClass]="{'is-invalid': submitted && f.password.errors?.['required'] || submitted && f.password.errors?.['minLength']}">
+        <label for="floatingPassword">Password</label>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors?.['required']">Password is required</div>
+          <div *ngIf="f.email.errors?.['minLength']">Password must be 6 digits at least</div>
+        </div>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+      <p class="mt-5 mb-3 text-muted">Have Account? <a [routerLink]="['/auth/login']">login</a></p>
+    </form>
+  </main>
+</div>
